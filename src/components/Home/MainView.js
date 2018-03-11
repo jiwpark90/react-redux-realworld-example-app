@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 const MainView = (props) => {
     return (
         <div className="col-md-9">
-            /* TODO guessing this is the filter */
+            {/* TODO guessing this is the filter */}
             <div className="feed-toggle">
                 <ul className="nav nav-pills outline-active">
                     <li className="nav-item">

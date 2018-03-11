@@ -13,7 +13,7 @@ class Home extends React.Component {
             <div className="home-page">
                 <Banner appName={this.props.appName} />
                 <div className="container page">
-                    /* TODO what is the purpose of this? perhaps CSS */
+                    {/* TODO what is the purpose of this? perhaps CSS */}
                     <div className="row">
                         <MainView />
 
