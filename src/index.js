@@ -1,35 +1,20 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
-// 1. import stuff from redux
-import { createStore, applyMiddleware } from 'redux';
-import { promiseMiddleware } from './middleware';
 import App from './components/App';
-
-const defaultState = { 
-  appName: 'conduit',
-  // note that this gets used in MainView as the state
-  articles: null
-};
-// 2. define reducer
-const reducer = function(state = defaultState, action) {
-  switch(action.type) {
-    case 'HOME_PAGE_LOADED':
-      return {
-        ...state,
-        articles: action.payload.articles
-      };
-  }
-  return state;
-}
-// 3. create store (has 3 important functions):
-  // a. subscribe
-  // b. dispatch
-  // c. getstate
-const store = createStore(reducer, applyMiddleware(promiseMiddleware));
+import store from './store';
+import Home from './components/Home';
+import Login from './components/Login';
+// TODO figure out what each of these are
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 ReactDOM.render((
   <Provider store={store}>
-    <App />
+    <Router history={hashHistory}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Home} />
+        <Route path="login" component={Login} />
+      </Route>
+    </Router>
   </Provider>
 ), document.getElementById('root'));

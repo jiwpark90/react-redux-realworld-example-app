@@ -1,24 +1,33 @@
 import Header from './Header';
 import Home from './Home';
 import React from 'react';
-// TODO record
 import { connect } from 'react-redux';
 
-// TODO review
 const mapStateToProps = state => ({
     appName: state.appName
 });
 
 class App extends React.Component {
     render() {
+        console.log("THIS SHOULD BE DEFINED");
+        console.log(this.props.children);
         return (
             <div>
                 <Header appName={this.props.appName} />
-                <Home />
+                {
+                    /* this tells JSX to render the routed child components */ 
+                    this.props.children 
+                }
             </div>
         );
     }
 }
 
-// TODO what
+// App.contextTypes = {
+//     // tells react-routher to attach the 'children' property
+//     // to this component's props
+//     // TODO how?
+//     router: React.PropTypes.object.isRequired
+// };
+
 export default connect(mapStateToProps, () => ({}))(App);
