@@ -7,15 +7,15 @@ import agent from '../../agent';
 const Promise = global.Promise;
 
 const mapStateToProps = (state) => ({
-    appName: state.appName
+    appName: state.common.appName
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onLoad: (payload) => {
-            return dispatch({
+            dispatch({
                 type: 'HOME_PAGE_LOADED',
-                payload // TODO this should be an error right?
+                payload
             });
         }
     };

@@ -15,6 +15,9 @@ const requests = {
     get: (url) => {
         // TODO no catch? is that to let it propagate up to the caller? TEST
         return superagent.get(`${API_ROOT}${url}`).then(responseBody);
+    },
+    post: (url, body) => {
+        return superagent.post(`${API_ROOT}${url}`, body).then(responseBody);
     }
 }
 
@@ -25,7 +28,14 @@ const Articles = {
     }
 };
 
+const Auth = {
+    login: (email, password) => {
+        return requests.post('/users/login', { user: { email, password }});
+    }
+};
+
 // export all endpoints
 export default {
-    Articles
+    Articles,
+    Auth
 };

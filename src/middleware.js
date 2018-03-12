@@ -2,6 +2,10 @@
 // resolve the promise and dispatch a new action with the results
 const promiseMiddleware = store => next => action => {
     if (isPromise(action.payload)) {
+        store.dispatch({
+            type: 'ASYNC_START',
+            subtype: action.type
+        });
         action.payload.then(
             (res) => {
                 action.payload = res;
@@ -13,8 +17,7 @@ const promiseMiddleware = store => next => action => {
                 store.dispatch(action);
             }
         );
-        // TODO don't we want to call next?
-        // is this because .dispatch() was called?
+        
         return;
     }
 
