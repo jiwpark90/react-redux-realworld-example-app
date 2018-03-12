@@ -2,8 +2,6 @@ import React from 'react';
 
 const ArticlePreview = (props) => {
     const article = props.article;
-    console.log("what");
-    console.log(article);
     return (
         <div className="article-preview">
             {/* info about the author */}

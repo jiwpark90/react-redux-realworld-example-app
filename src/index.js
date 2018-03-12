@@ -5,7 +5,6 @@ import App from './components/App';
 import store from './store';
 import Home from './components/Home';
 import Login from './components/Login';
-// TODO figure out what each of these are
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 ReactDOM.render((

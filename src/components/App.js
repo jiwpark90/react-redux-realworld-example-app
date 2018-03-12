@@ -9,8 +9,6 @@ const mapStateToProps = state => ({
 
 class App extends React.Component {
     render() {
-        console.log("THIS SHOULD BE DEFINED");
-        console.log(this.props.children);
         return (
             <div>
                 <Header appName={this.props.appName} />
