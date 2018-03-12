@@ -8,6 +8,7 @@ import App from './components/App';
 
 const defaultState = { 
   appName: 'conduit',
+  // note that this gets used in MainView as the state
   articles: null
 };
 // 2. define reducer
