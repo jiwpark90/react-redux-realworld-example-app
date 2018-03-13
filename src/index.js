@@ -10,7 +10,8 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 ReactDOM.render((
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path="/" component={App}>
+      {/* TODO try not passing and just importing in App.js */}
+      <Route path="/" component={App} router={Router}>
         <IndexRoute component={Home} />
         <Route path="login" component={Login} />
       </Route>

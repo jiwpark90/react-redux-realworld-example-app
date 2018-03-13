@@ -1,6 +1,16 @@
-export default (state = {}, action) => {
+const defaultState = {
+    email: '',
+    password: '',
+    inProgress: false
+}
+
+export default (state = defaultState, action) => {
     switch(action.type) {
         // TODO probably better to rename to 'LOGGED_IN'
+        // NOTE: this action type is also in common.js.
+        // what this means is that there are multiple reducers watching
+        // for the action, and it updates its state in the ways that
+        // makes sense for the different reducers.
         case 'LOGIN':
             return {
                 ...state,

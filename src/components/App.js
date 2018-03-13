@@ -4,10 +4,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
-    appName: state.common.appName
+    appName: state.common.appName,
+    redirectTo: state.common.redirectTo
 });
 
+const mapDispatchToProps = dispatch => {
+    return {
+        onRedirect: () => {
+            dispatch({ type: 'REDIRECT' });
+        }
+    }
+};
+
 class App extends React.Component {
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.redirectTo) {
+            // TODO check this out
+            this.props.router.replace(nextProps.redirectTo);
+            this.props.onRedict();
+        }
+    }
+
     render() {
         return (
             <div>
@@ -21,11 +38,4 @@ class App extends React.Component {
     }
 }
 
-// App.contextTypes = {
-//     // tells react-routher to attach the 'children' property
-//     // to this component's props
-//     // TODO how?
-//     router: React.PropTypes.object.isRequired
-// };
-
-export default connect(mapStateToProps, () => ({}))(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

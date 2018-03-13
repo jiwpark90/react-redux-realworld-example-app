@@ -35,23 +35,41 @@ const mapDispatchToProps = (dispatch) => {
 class Login extends React.Component {
     constructor() {
         super();
-        this.changeEmail = (event) => {
-            this.props.onChangeEmail(event.target.value);
-        };
-        this.changePassword = (event) => {
-            this.props.onChangePassword(event.target.value);
-        };
-        // TODO understand this. in thinkster, it's:
-        /*
-        this.submitForm = (email, password) => (event) => {
-            event.preventDefault();
-            this.props.onSubmit(email, password);
-        };
-        */
-        this.submitForm = (email, password) => (event) => {
-            event.preventDefault();
-            this.props.onSubmit(email, password);
-        };
+        this.changeEmail = this.changeEmail.bind(this);
+        this.changePassword = this.changePassword.bind(this);
+        this.submitForm = this.submitForm.bind(this);
+        // this is because the event handlers expect a function, not a function call.
+        // without this, there would be no way (TODO try making it happen without it)
+        // to give the eventhandler a function that takes in the email and password
+        // since it only passes the HTML event
+        // this.submitForm = (email, password) => (event) => {
+        //     event.preventDefault();
+        //     this.props.onSubmit(email, password);
+        // };
+        this.submitForm = this.submitForm.bind(this);
+    }
+
+    changeEmail(event) {
+        this.props.onChangeEmail(event.target.value);
+    }
+
+    changePassword(event) {
+        this.props.onChangePassword(event.target.value);
+    }
+
+    submitForm(event) {
+        const { email, password } = this.props;
+        this.props.onSubmit(email, password);
+        // another cool pattern is defining the following in the constructor:
+        // this.submitForm = (email, password) => (event) => {
+        //     event.preventDefault();
+        //     this.props.onSubmit(email, password);
+        // };
+        // and in JSX, defining: 
+        // const {email, passowrd} = this.props;
+        // onSubmit={this.submitForm(email, password)}
+        // this way, the email/password props are not gotten everytime,
+        // though it's  not a big diff. wonder if it makes other differences....
     }
     
     render() {
@@ -71,7 +89,7 @@ class Login extends React.Component {
 
                             <ListErrors errors={this.props.errors} />
 
-                            <form onSubmit={this.submitForm(email, password)}>
+                            <form onSubmit={this.submitForm}>
                                 <fieldset className="form-group">
                                     <input
                                         className="form-control form-control-lg"
