@@ -49,7 +49,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Header appName={this.props.appName} />
+                <Header appName={this.props.appName} currentUser={this.props.current} />
                 {
                     /* this tells JSX to render the routed child components */ 
                     this.props.children 
