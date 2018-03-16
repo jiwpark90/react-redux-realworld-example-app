@@ -1,6 +1,6 @@
 // 1. import
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { promiseMiddleware } from './middleware';
+import { promiseMiddleware, localStorageMiddleware } from './middleware';
 import auth from './reducers/auth';
 import common from './reducers/common';
 import home from './reducers/home';
@@ -13,7 +13,8 @@ const reducer = combineReducers({
 });
 
 // 3. define any middleware
-const middleware = applyMiddleware(promiseMiddleware);
+// TODO order is important?
+const middleware = applyMiddleware(promiseMiddleware, localStorageMiddleware);
 
 // 4. create store (has 3 important functions):
 // a. subscribe

@@ -41,7 +41,6 @@ class App extends React.Component {
     componentWillReceiveProps(nextProps) {
         console.log("APP: componentWillReceiveProps");
         if (nextProps.redirectTo) {
-            // TODO check this out
             this.props.router.replace(nextProps.redirectTo);
             this.props.onRedict();
         }

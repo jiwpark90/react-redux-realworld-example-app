@@ -14,10 +14,10 @@ const responseBody = response => response.body;
 const requests = {
     get: (url) => {
         // TODO no catch? is that to let it propagate up to the caller? TEST
-        return superagent.get(`${API_ROOT}${url}`).then(responseBody);
+        return superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody);
     },
     post: (url, body) => {
-        return superagent.post(`${API_ROOT}${url}`, body).then(responseBody);
+        return superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody);
     }
 }
 
@@ -38,8 +38,13 @@ const Auth = {
 };
 
 let token = null;
+// TODO is plugin a super agent concept? middleware for it?
+let tokenPlugin = (req) => {
+    if (token) {
+        req.set('authorization', `Token ${token}`);
+    }
+}
 const setToken = (_token) => {
-    // TODO what??? what is the token?
     token = _token
 }
 
