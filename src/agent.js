@@ -31,11 +31,21 @@ const Articles = {
 const Auth = {
     login: (email, password) => {
         return requests.post('/users/login', { user: { email, password }});
+    },
+    current: () => {
+        return requests.get('/user');
     }
 };
+
+let token = null;
+const setToken = (_token) => {
+    // TODO what??? what is the token?
+    token = _token
+}
 
 // export all endpoints
 export default {
     Articles,
-    Auth
+    Auth,
+    setToken
 };

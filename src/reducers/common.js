@@ -27,6 +27,8 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 redirectTo: action.error ? null : '/',
+                // TODO what is the point of this if agent has it
+                // and it's already in the local storage?
                 token: action.error ? null : action.payload.user.token,
                 currentUser: action.error ? null : action.payload.user
             };
