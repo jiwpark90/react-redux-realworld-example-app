@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 class App extends React.Component {
-    // WHAT?
+    // TODO revisit
     componentWillMount() {
         console.log("APP: componentWillMount");
         const token = window.localStorage.getItem('jwt');
@@ -41,7 +41,7 @@ class App extends React.Component {
     componentWillReceiveProps(nextProps) {
         console.log("APP: componentWillReceiveProps");
         if (nextProps.redirectTo) {
-            this.props.router.replace(nextProps.redirectTo);
+            this.context.router.replace(nextProps.redirectTo);
             this.props.onRedict();
         }
     }
@@ -58,5 +58,10 @@ class App extends React.Component {
         );
     }
 }
+
+// TODO seems like magic....
+App.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

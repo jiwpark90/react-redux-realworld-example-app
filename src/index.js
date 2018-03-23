@@ -11,7 +11,7 @@ ReactDOM.render((
   <Provider store={store}>
     <Router history={hashHistory}>
       {/* TODO try not passing and just importing in App.js */}
-      <Route path="/" component={App} router={Router}>
+      <Route path="/" component={App}>
         <IndexRoute component={Home} />
         <Route path="login" component={Login} />
       </Route>
