@@ -4,12 +4,14 @@ import { promiseMiddleware, localStorageMiddleware } from './middleware';
 import auth from './reducers/auth';
 import common from './reducers/common';
 import home from './reducers/home';
+import settings from './reducers/settings';
 
 // 2. define a reducer from separated reducers
 const reducer = combineReducers({
     auth,
     common,
-    home
+    home,
+    settings
 });
 
 // 3. define any middleware

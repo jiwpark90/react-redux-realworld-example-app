@@ -18,6 +18,9 @@ const requests = {
     },
     post: (url, body) => {
         return superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody);
+    },
+    put: (url, body) => {
+        return superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody);
     }
 }
 
@@ -37,6 +40,9 @@ const Auth = {
     },
     register: (username, email, password) => {
         return requests.post('/users', { user: { username, email, password}});
+    },
+    save: user => {
+        return requests.put('/user', { user })
     }
 };
 

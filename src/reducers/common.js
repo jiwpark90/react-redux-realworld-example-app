@@ -19,6 +19,21 @@ export default (state = defaultState, action) => {
                 redirectTo: null
             };
 
+        // below two are dispatched by the settings component
+        case 'LOGOUT':
+            return {
+                ...state,
+                redirectTo: '/',
+                token: null,
+                currentUser: null
+            };
+        case 'SETTINGS_SAVED':
+            return {
+                ...state,
+                redirectTo: action.error ? null : '/',
+                currentUser: action.error ? null : action.payload.user
+            };
+
         // NOTE: this action type is also in auth.js.
         // what this means is that there are multiple reducers watching
         // for the action, and it updates its state in the ways that
