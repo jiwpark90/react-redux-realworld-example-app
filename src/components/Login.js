@@ -2,51 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import agent from '../agent';
 import ListErrors from './ListErrors';
+import { Link } from 'react-router';
 
-const mapStateToProps = (state) => {
-    return { ...state.auth };
-};
+const mapStateToProps = (state) => ({ ...state.auth });
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onChangeEmail: (value) => {
-            dispatch({
-                type: 'UPDATE_FIELD_AUTH',
-                key: 'email',
-                value
-            });
-        },
-        onChangePassword: (value) => {
-            dispatch({
-                type: 'UPDATE_FIELD_AUTH',
-                key: 'password',
-                value
-            });
-        },
-        onSubmit: (email, password) => {
-            dispatch({
-                type: 'LOGIN',
-                payload: agent.Auth.login(email, password)
-            });
-        }
-    };
-};
+const mapDispatchToProps = (dispatch) => ({
+    onChangeEmail: value => 
+        dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'email', value }),
+    onChangePassword: value => 
+        dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'password', value }),
+    onSubmit: (email, password) => 
+        dispatch({ type: 'LOGIN', payload: agent.Auth.login(email, password) })
+});
 
 class Login extends React.Component {
     constructor() {
         super();
-        this.changeEmail = this.changeEmail.bind(this);
-        this.changePassword = this.changePassword.bind(this);
-        this.submitForm = this.submitForm.bind(this);
-        // this is because the event handlers expect a function, not a function call.
-        // without this, there would be no way (TODO try making it happen without it)
-        // to give the eventhandler a function that takes in the email and password
-        // since it only passes the HTML event
-        // this.submitForm = (email, password) => (event) => {
-        //     event.preventDefault();
-        //     this.props.onSubmit(email, password);
-        // };
-        this.submitForm = this.submitForm.bind(this);
+        this.changeEmail = event => this.props.onChangeEmail(event.target.value);
+        this.changePassword = event => this.props.onChangePassword(event.target.value);
+        this.submitForm = (email, password) => event => {
+            event.preventDefault();
+            this.props.onSubmit(email, password);
+        };
     }
 
     changeEmail(event) {
@@ -57,23 +34,9 @@ class Login extends React.Component {
         this.props.onChangePassword(event.target.value);
     }
 
-    submitForm(event) {
-        const { email, password } = this.props;
-        this.props.onSubmit(email, password);
-        // another cool pattern is defining the following in the constructor:
-        // this.submitForm = (email, password) => (event) => {
-        //     event.preventDefault();
-        //     this.props.onSubmit(email, password);
-        // };
-        // and in JSX, defining: 
-        // const {email, passowrd} = this.props;
-        // onSubmit={this.submitForm(email, password)}
-        // this way, the email/password props are not gotten everytime,
-        // though it's  not a big diff. wonder if it makes other differences....
-    }
-    
     render() {
-        const { email, password } = this.props;
+        const email = this.props.email;
+        const password = this.props.password;
         return (
             <div className="auth-page">
                 <div className="container page">
@@ -82,14 +45,14 @@ class Login extends React.Component {
                         <div className="col-md-6 offset-md-3 col-xs-12">
                             <h1 className="text-xs-center">Sign In</h1>
                             <p className="text-xs-center">
-                                <a>
+                                <Link to="register">
                                     Need an account?
-                                </a>
+                                </Link>
                             </p>
 
                             <ListErrors errors={this.props.errors} />
 
-                            <form onSubmit={this.submitForm}>
+                            <form onSubmit={this.submitForm(email, password)}>
                                 <fieldset className="form-group">
                                     <input
                                         className="form-control form-control-lg"

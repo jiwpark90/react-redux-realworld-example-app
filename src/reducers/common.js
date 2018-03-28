@@ -14,6 +14,7 @@ export default (state = defaultState, action) => {
                 currentUser: action.payload ? action.payload.user : null
             };
         case 'REDIRECT':
+            console.log("REDIRECT reduced", state);
             return {
                 ...state,
                 redirectTo: null

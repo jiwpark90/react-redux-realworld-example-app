@@ -38,8 +38,8 @@ const Auth = {
 };
 
 let token = null;
-// TODO is plugin a super agent concept? middleware for it?
-let tokenPlugin = (req) => {
+// this kicks in on the way to make the request
+const tokenPlugin = (req) => {
     if (token) {
         req.set('authorization', `Token ${token}`);
     }

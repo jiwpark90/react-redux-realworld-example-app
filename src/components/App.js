@@ -10,26 +10,19 @@ const mapStateToProps = state => ({
     redirectTo: state.common.redirectTo
 });
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onRedirect: () => {
-            dispatch({ type: 'REDIRECT' });
-        },
-        onLoad: (payload, token) => {
-            dispatch({
-                type: 'APP_LOAD',
-                payload,
-                token
-            });
-        }
-    }
-};
+const mapDispatchToProps = dispatch => ({
+    onRedirect: () => 
+        dispatch({ type: 'REDIRECT' }),
+    // payload is either a promise to fetch a user, or null (if no token)
+    onLoad: (payload, token) =>
+        dispatch({ type: 'APP_LOAD', payload, token })
+});
 
 class App extends React.Component {
-    // TODO revisit
+    // when the app load
     componentWillMount() {
-        console.log("APP: componentWillMount");
         const token = window.localStorage.getItem('jwt');
+        console.log(`APP: componentWillMount ${ token }`);
         if (token) {
             agent.setToken(token);
         }
@@ -39,10 +32,10 @@ class App extends React.Component {
     }
     
     componentWillReceiveProps(nextProps) {
-        console.log("APP: componentWillReceiveProps");
+        console.log(`APP: componentWillReceiveProps: ${nextProps.redirectTo}`);
         if (nextProps.redirectTo) {
             this.context.router.replace(nextProps.redirectTo);
-            this.props.onRedict();
+            this.props.onRedirect();
         }
     }
 
