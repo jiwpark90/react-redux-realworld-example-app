@@ -14,7 +14,6 @@ export default (state = defaultState, action) => {
                 currentUser: action.payload ? action.payload.user : null
             };
         case 'REDIRECT':
-            console.log("REDIRECT reduced", state);
             return {
                 ...state,
                 redirectTo: null
@@ -25,10 +24,11 @@ export default (state = defaultState, action) => {
         // for the action, and it updates its state in the ways that
         // makes sense for the different reducers.
         case 'LOGIN':
+        case 'REGISTER':
             return {
                 ...state,
                 redirectTo: action.error ? null : '/',
-                // TODO what is the point of this if agent has it
+                // Q: What is the point of this if agent has it
                 // and it's already in the local storage?
                 token: action.error ? null : action.payload.user.token,
                 currentUser: action.error ? null : action.payload.user

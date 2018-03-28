@@ -19,7 +19,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class App extends React.Component {
-    // when the app load
+    // when the app loads, try to get the jwt token from the localstorage.
+    // if it exists, get the current user to store in the redux state.
+    // if not, do nothing
     componentWillMount() {
         const token = window.localStorage.getItem('jwt');
         console.log(`APP: componentWillMount ${ token }`);

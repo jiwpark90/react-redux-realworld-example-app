@@ -12,6 +12,7 @@ export default (state = defaultState, action) => {
         // for the action, and it updates its state in the ways that
         // makes sense for the different reducers.
         case 'LOGIN':
+        case 'REGISTER':
             return {
                 ...state,
                 inProgress: false,

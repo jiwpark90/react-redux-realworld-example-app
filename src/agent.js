@@ -34,6 +34,9 @@ const Auth = {
     },
     current: () => {
         return requests.get('/user');
+    },
+    register: (username, email, password) => {
+        return requests.post('/users', { user: { username, email, password}});
     }
 };
 
