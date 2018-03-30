@@ -32,6 +32,9 @@ export default (state = defaultState, action) => {
                 // computed property name
                 [action.key]: action.value
             };
+        case 'LOGIN_PAGE_UNLOADED':
+        case 'REGISTER_PAGE_UNLOADED':
+            return {};
     }
     return state;
 };
