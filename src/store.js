@@ -6,6 +6,8 @@ import common from './reducers/common';
 import home from './reducers/home';
 import settings from './reducers/settings';
 import article from './reducers/article';
+import articleList from './reducers/articleList';
+import profile from './reducers/profile';
 
 // 2. define a reducer from separated reducers
 const reducer = combineReducers({
@@ -13,7 +15,9 @@ const reducer = combineReducers({
     common,
     home,
     settings,
-    article
+    article,
+    articleList,
+    profile
 });
 
 // 3. define any middleware

@@ -37,6 +37,22 @@ const Articles = {
     },
     del: (slug) => {
         return requests.del(`/articles/${slug}`);
+    },
+    byAuthor: (author, page) => {
+        // TODO what is encodeURIComponent??
+        return requests.get(`/articles?author=${encodeURIComponent(author)}&limit=5`)
+    }
+};
+
+const Profile = {
+    follow: username => {
+        return requests.post(`/profiles/${username}/follow`);
+    },
+    get: username => {
+        return requests.get(`/profiles/${username}`);
+    },
+    unfollow: username => {
+        return requests.del(`/profiles/${username}/follow`);
     }
 };
 
@@ -83,5 +99,6 @@ export default {
     Articles,
     Auth,
     Comments,
+    Profile,
     setToken
 };

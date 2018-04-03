@@ -17,6 +17,11 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'HOME_PAGE_LOADED',
                 payload
             });
+        },
+        onUnload: () => {
+            dispatch({
+                type: 'HOME_PAGE_UNLOADED'
+            });
         }
     };
 };
@@ -24,6 +29,10 @@ const mapDispatchToProps = (dispatch) => {
 class Home extends React.Component {
     componentWillMount() {
         this.props.onLoad(agent.Articles.all());
+    }
+
+    componentWillUnmount() {
+        this.props.onUnload();
     }
     
     render() {

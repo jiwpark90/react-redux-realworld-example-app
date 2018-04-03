@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Settings from './components/Settings';
 import Article from './components/Article';
+import Profile from './components/Profile';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 ReactDOM.render((
@@ -20,6 +21,8 @@ ReactDOM.render((
         <Route path="settings" component={Settings} />
         {/* TODO passes params object? */}
         <Route path="article/:id" component={Article} />
+        {/* TODO wtf is @ */}
+        <Route path="@:username" component={Profile} />
       </Route>
     </Router>
   </Provider>
