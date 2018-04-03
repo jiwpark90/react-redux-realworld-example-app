@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const ArticlePreview = (props) => {
     const article = props.article;
@@ -6,25 +7,26 @@ const ArticlePreview = (props) => {
         <div className="article-preview">
             {/* info about the author */}
             <div className="article-meta">
-                {
-                    article.author.image && 
-                    <a>
-                        <img src={article.author.image} />
-                    </a>
-                }
+                {/* WTF does the '@' do?? */}
+                <Link to={`@${ article.author.username }`}>
+                    {
+                        article.author.image && 
+                            <img src={article.author.image} />
+                    }
+                </Link>
+                
 
                 <div className="info">
-                    <a className="author">
+                    <Link className="author" to={`@${article.author.username}`}>
                         { article.author.username }
-                    </a>
+                    </Link>
                     <span className="date">
                         { new Date(article.createdAt).toDateString() }
                     </span>
                 </div>
 
                 <div className="pull-xs-right">
-                    <button 
-                        className="btn btn-sm btn-outline-primary">
+                    <button className="btn btn-sm btn-outline-primary">
                         <i className="ion-heart"></i>
                         { article.favoritesCount }
                     </button>
@@ -32,7 +34,7 @@ const ArticlePreview = (props) => {
             </div>
 
             {/* article info */}
-            <a to={`article/${article.slug}`} 
+            <Link to={`article/${article.slug}`} 
                 className="preview-link">
                 <h1>{ article.title }</h1>
                 <p>{ article.description }</p>
@@ -41,15 +43,14 @@ const ArticlePreview = (props) => {
                     {
                         article.tagList.map((tag) => {
                             return (
-                                <li className="tag-default tag-pill tag-outline"
-                                    key={tag}>
+                                <li className="tag-default tag-pill tag-outline" key={tag}>
                                     {tag}
                                 </li>
                             )
                         })
                     }
                 </ul>
-            </a>
+            </Link>
         </div>
     );
 };

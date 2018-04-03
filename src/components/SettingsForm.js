@@ -26,6 +26,9 @@ class SettingsForm extends React.Component {
 
             // copy information from component's current state
             const user = Object.assign({}, this.state);
+
+            // if no content for the password box, don't send it in
+            // since it will try to update the password to be empty
             if (!user.password) {
                 delete user.password;
             }
@@ -48,8 +51,6 @@ class SettingsForm extends React.Component {
     // TODO when would you ever come here? user shouldn't change.
     // if it does, it would be for logging out
     componentWillReceiveProps(nextProps) {
-        console.log(`componentWillReceiveProps??`);
-        console.log(nextProps);
         if (nextProps.currentUser) {
             this.setState(Object.assign({}, this.state, {
                 image: nextProps.currentUser.image || '',

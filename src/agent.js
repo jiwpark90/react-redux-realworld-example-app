@@ -21,15 +21,36 @@ const requests = {
     },
     put: (url, body) => {
         return superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody);
+    },
+    del: (url, body) => {
+        return superagent.del(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody);
     }
 }
 
-// endpoint
+// endpoints
 const Articles = {
     all: (page) => {
         return requests.get(`/articles?limit=10`);
+    },
+    get: (slug) => {
+        return requests.get(`/articles/${slug}`);
+    },
+    del: (slug) => {
+        return requests.del(`/articles/${slug}`);
     }
 };
+
+const Comments = {
+    forArticle: slug => {
+        return requests.get(`/articles/${slug}/comments`);
+    },
+    create: (slug, comment) => {
+        return requests.post(`/articles/${slug}/comments`, { comment });
+    },
+    delete: (slug, commentId) => {
+        return requests.del(`/articles/${slug}/comments/${commentId}`);
+    }
+}
 
 const Auth = {
     login: (email, password) => {
@@ -61,5 +82,6 @@ const setToken = (_token) => {
 export default {
     Articles,
     Auth,
+    Comments,
     setToken
 };
