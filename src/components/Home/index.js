@@ -35,7 +35,6 @@ class Home extends React.Component {
             agent.Articles.feed() :
             agent.Articles.all();
 
-        // TODO what?
         this.props.onLoad(tab, articlesPromise);
     }
 
