@@ -39,7 +39,6 @@ class Profile extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log("unmountttt");
         this.props.onUnload();
     }
 
@@ -161,3 +160,5 @@ const FollowUserButton = props => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+// so that ProfileFavorites can use it
+export { Profile as Profile, mapStateToProps as mapStateToProps };

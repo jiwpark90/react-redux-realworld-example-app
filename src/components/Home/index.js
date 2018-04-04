@@ -7,14 +7,16 @@ import agent from '../../agent';
 const Promise = global.Promise;
 
 const mapStateToProps = (state) => ({
-    appName: state.common.appName
+    appName: state.common.appName,
+    token: state.common.token
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLoad: (payload) => {
+        onLoad: (tab, payload) => {
             dispatch({
                 type: 'HOME_PAGE_LOADED',
+                tab,
                 payload
             });
         },
@@ -28,7 +30,13 @@ const mapDispatchToProps = (dispatch) => {
 
 class Home extends React.Component {
     componentWillMount() {
-        this.props.onLoad(agent.Articles.all());
+        const tab = this.props.token ? 'feed' : 'all';
+        const articlesPromise = this.props.token ?
+            agent.Articles.feed() :
+            agent.Articles.all();
+
+        // TODO what?
+        this.props.onLoad(tab, articlesPromise);
     }
 
     componentWillUnmount() {

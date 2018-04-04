@@ -41,6 +41,12 @@ const Articles = {
     byAuthor: (author, page) => {
         // TODO what is encodeURIComponent??
         return requests.get(`/articles?author=${encodeURIComponent(author)}&limit=5`)
+    },
+    favoritedBy: (author, page) => {
+        return requests.get(`/articles?favorited=${encodeURIComponent(author)}&limit=5`);
+    },
+    feed: () => {
+        return requests.get(`/articles/feed?limit=10`);
     }
 };
 

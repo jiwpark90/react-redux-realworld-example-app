@@ -5,10 +5,12 @@ export default (state = {}, action) => {
         // and 1th promise being a call to get artcielist for that user.
         // in the profile reducer, only deal with profile
         case 'PROFILE_PAGE_LOADED':
+        case 'PROFILE_FAVORITES_PAGE_LOADED':
             return {
                 ...action.payload[0].profile
             };
         case 'PROFILE_PAGE_UNLOADED':
+        case 'PROFILE_FAVORITES_PAGE_UNLOADED':
             return {};
 
         // the agent calls to these methods return a profile
