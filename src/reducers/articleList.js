@@ -7,7 +7,6 @@ export default (state = {}, action) => {
                 ...state,
                 articles: action.payload.articles,
                 articlesCount: action.payload.articlesCount,
-                // TODO shouldn't 'tab' be here?
                 tab: action.tab
             };
         case 'HOME_PAGE_UNLOADED':
