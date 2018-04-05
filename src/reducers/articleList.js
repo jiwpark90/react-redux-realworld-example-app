@@ -5,10 +5,19 @@ export default (state = {}, action) => {
         case 'HOME_PAGE_LOADED':
             return {
                 ...state,
-                articles: action.payload.articles,
-                articlesCount: action.payload.articlesCount,
+                // 0th payload handled in home reducer
+                articles: action.payload[1].articles,
+                articlesCount: action.payload[1].articlesCount,
                 tab: action.tab
             };
+        case 'APPLY_TAG_FILTER':
+            return {
+                ...state,
+                articles: action.payload.articles,
+                articlesCount: action.payload.articlesCount,
+                tab: null, // TODO what? Partial A - needs to take focus away from the two default tabs
+                tag: action.tag
+            }
         case 'HOME_PAGE_UNLOADED':
             return {};
         // this action is dispatched from the Profile component.
@@ -31,7 +40,8 @@ export default (state = {}, action) => {
                 ...state,
                 articles: action.payload.articles,
                 articlesCount: action.payload.articlesCount,
-                tab: action.tab
+                tab: action.tab,
+                tag: null
             };
     }
     return state;

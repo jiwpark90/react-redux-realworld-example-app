@@ -47,6 +47,9 @@ const Articles = {
     },
     feed: () => {
         return requests.get(`/articles/feed?limit=10`);
+    },
+    byTag: tag => {
+        return requests.get(`/articles?tag=${encodeURIComponent(tag)}&limit=10`);
     }
 };
 
@@ -89,6 +92,12 @@ const Auth = {
     }
 };
 
+const Tags = {
+    getAll: () => {
+        return requests.get(`/tags`);
+    }
+};
+
 let token = null;
 // this kicks in on the way to make the request
 const tokenPlugin = (req) => {
@@ -106,5 +115,6 @@ export default {
     Auth,
     Comments,
     Profile,
+    Tags,
     setToken
 };

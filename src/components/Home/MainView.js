@@ -13,6 +13,20 @@ const mapDispatchToProps = dispatch => ({
         dispatch({ type: 'CHANGE_TAB', tab, payload })
 });
 
+const TagFilterTab = props => {
+    if (!props.tag) {
+        return null;
+    }
+
+    return (
+        <li className="nav-item">
+            <a href="" className="nav-link active">
+                <i className="ion-pound"></i>&nbsp;{props.tag}
+            </a>
+        </li>
+    );
+}
+
 const YourFeedTab = props => {
     if (props.token) {
         const clickHandler = event => {
@@ -62,6 +76,7 @@ const MainView = (props) => {
                         onTabClick={props.onTabClick} />
                     <GlobalFeedTab tab={props.tab}
                         onTabClick={props.onTabClick} />
+                    <TagFilterTab tag={props.tag} />
                 </ul>
             </div>
             <ArticleList articles={ props.articles } />
