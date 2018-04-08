@@ -10,7 +10,12 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onTabClick: (tab, payload) =>
-        dispatch({ type: 'CHANGE_TAB', tab, payload })
+        dispatch({ type: 'CHANGE_TAB', tab, payload }),
+    onSetPage: (tab, p) => dispatch({
+        type: 'SET_PAGE',
+        page: p,
+        payload: tab === 'feed' ? agent.Articles.feed(p) : agent.Articles.all(p)
+    })
 });
 
 const TagFilterTab = props => {
@@ -66,6 +71,10 @@ const GlobalFeedTab = props => {
 }
 
 const MainView = (props) => {
+    const onSetPage = page => {
+        console.log(props.tab);
+        return props.onSetPage(props.tab, page);
+    }
     return (
         <div className="col-md-9">
             {/* TODO guessing this is the filter */}
@@ -79,7 +88,10 @@ const MainView = (props) => {
                     <TagFilterTab tag={props.tag} />
                 </ul>
             </div>
-            <ArticleList articles={ props.articles } />
+            <ArticleList articles={ props.articles }
+                articlesCount={ props.articlesCount }
+                currentPage={ props.currentPage }
+                onSetPage={onSetPage} />
         </div>
     );
 };

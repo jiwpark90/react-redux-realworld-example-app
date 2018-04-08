@@ -8,7 +8,8 @@ export default (state = {}, action) => {
                 // 0th payload handled in home reducer
                 articles: action.payload[1].articles,
                 articlesCount: action.payload[1].articlesCount,
-                tab: action.tab
+                tab: action.tab,
+                currentPage: 0
             };
         case 'APPLY_TAG_FILTER':
             return {
@@ -16,7 +17,8 @@ export default (state = {}, action) => {
                 articles: action.payload.articles,
                 articlesCount: action.payload.articlesCount,
                 tab: null, // TODO what? Partial A - needs to take focus away from the two default tabs
-                tag: action.tag
+                tag: action.tag,
+                currentPage: 0
             }
         case 'HOME_PAGE_UNLOADED':
             return {};
@@ -29,7 +31,8 @@ export default (state = {}, action) => {
             return {
                 ...state,
                 articles: action.payload[1].articles,
-                articlesCount: action.payload[1].articlesCount
+                articlesCount: action.payload[1].articlesCount,
+                currentPage: 0
             };
         case 'PROFILE_PAGE_UNLOADED':
         case 'PROFILE_FAVORITES_PAGE_UNLOADED':
@@ -41,7 +44,16 @@ export default (state = {}, action) => {
                 articles: action.payload.articles,
                 articlesCount: action.payload.articlesCount,
                 tab: action.tab,
-                tag: null
+                tag: null,
+                currentPage: 0
+            };
+
+        case 'SET_PAGE':
+            return {
+                ...state,
+                articles: action.payload.articles,
+                articlesCount: action.payload.articlesCount,
+                currentPage: action.Page
             };
     }
     return state;

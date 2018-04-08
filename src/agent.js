@@ -27,29 +27,33 @@ const requests = {
     }
 }
 
+const limit = (count, p) => 
+    `limit=${count}&offset=${p ? p * count : 0}`;
+// TODO what is encodeURIComponent??
+const encode = encodeURIComponent;
+
 // endpoints
 const Articles = {
     all: (page) => {
-        return requests.get(`/articles?limit=10`);
+        return requests.get(`/articles?${limit(10, page)}`);
     },
-    get: (slug) => {
-        return requests.get(`/articles/${slug}`);
+    byTag: (tag, page) => {
+        return requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`);
+    },
+    byAuthor: (author, page) => {
+        return requests.get(`/articles?author=${encode(author)}&${limit(10, page)}`)
     },
     del: (slug) => {
         return requests.del(`/articles/${slug}`);
     },
-    byAuthor: (author, page) => {
-        // TODO what is encodeURIComponent??
-        return requests.get(`/articles?author=${encodeURIComponent(author)}&limit=5`)
-    },
     favoritedBy: (author, page) => {
-        return requests.get(`/articles?favorited=${encodeURIComponent(author)}&limit=5`);
+        return requests.get(`/articles?favorited=${encode(author)}&${limit(10, page)}`);
     },
-    feed: () => {
-        return requests.get(`/articles/feed?limit=10`);
+    feed: (page) => {
+        return requests.get(`/articles/feed?${limit(10, page)}`);
     },
-    byTag: tag => {
-        return requests.get(`/articles?tag=${encodeURIComponent(tag)}&limit=10`);
+    get: (slug) => {
+        return requests.get(`/articles/${slug}`);
     }
 };
 
