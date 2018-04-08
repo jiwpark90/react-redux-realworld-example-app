@@ -10,6 +10,7 @@ import Settings from './components/Settings';
 import Article from './components/Article';
 import Profile from './components/Profile';
 import ProfileFavorites from './components/ProfileFavorites';
+import Editor from './components/Editor';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 ReactDOM.render((
@@ -25,6 +26,8 @@ ReactDOM.render((
         {/* TODO wtf is @? test if it works with other symbols */}
         <Route path="@:username" component={Profile} />
         <Route path="@:username/favorites" component={ProfileFavorites} />
+        <Route path="editor" component={Editor} />
+        <Route path="editor/:slug" component={Editor} />
       </Route>
     </Router>
   </Provider>

@@ -8,6 +8,7 @@ import settings from './reducers/settings';
 import article from './reducers/article';
 import articleList from './reducers/articleList';
 import profile from './reducers/profile';
+import editor from './reducers/editor';
 
 // 2. define a reducer from separated reducers
 const reducer = combineReducers({
@@ -17,7 +18,8 @@ const reducer = combineReducers({
     settings,
     article,
     articleList,
-    profile
+    profile,
+    editor
 });
 
 // 3. define any middleware

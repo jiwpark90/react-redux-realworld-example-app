@@ -34,6 +34,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 // TODO BUG: if going to the current user profile via the Header, nothing happens
+// TODO I THINK I FOUND THE PROBLEM
+// react-router reuses the component if two routes have the SAME COMPONENT.
+// e.g. if /editor & /editor/slug both use the Editor component won't recreate
+// if you navigate to '/editor' from '/editor/slug'.
+// TO GET AROUND THIS PROBLEM, use 'componentWillReceiveProps()'
 class Profile extends React.Component {
     componentWillMount() {
         console.log('Profile:componentWillMount');

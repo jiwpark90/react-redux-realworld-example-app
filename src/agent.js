@@ -31,17 +31,19 @@ const limit = (count, p) =>
     `limit=${count}&offset=${p ? p * count : 0}`;
 // TODO what is encodeURIComponent??
 const encode = encodeURIComponent;
+const omitSlug = article =>
+    Object.assign({}, article, { slug: undefined });
 
 // endpoints
 const Articles = {
     all: (page) => {
         return requests.get(`/articles?${limit(10, page)}`);
     },
-    byTag: (tag, page) => {
-        return requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`);
-    },
     byAuthor: (author, page) => {
         return requests.get(`/articles?author=${encode(author)}&${limit(10, page)}`)
+    },
+    byTag: (tag, page) => {
+        return requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`);
     },
     del: (slug) => {
         return requests.del(`/articles/${slug}`);
@@ -54,6 +56,13 @@ const Articles = {
     },
     get: (slug) => {
         return requests.get(`/articles/${slug}`);
+    },
+    update: article => {
+        return requests.put(`/articles/${ article.slug }`,
+            { article: omitSlug(article) });
+    },
+    create: article => {
+        return requests.post('/articles', { article });
     }
 };
 
