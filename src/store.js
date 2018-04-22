@@ -23,7 +23,7 @@ const reducer = combineReducers({
 });
 
 // 3. define any middleware
-// TODO order is important?
+// Q: order is important? A: yes.
 const middleware = applyMiddleware(promiseMiddleware, localStorageMiddleware);
 
 // 4. create store (has 3 important functions):

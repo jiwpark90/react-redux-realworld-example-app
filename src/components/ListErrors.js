@@ -8,9 +8,14 @@ class ListErrors extends React.Component {
                 <ul className="error-messages">
                     {
                         Object.keys(errors).map((key) => {
+                            let details = "";
+                            const showNums = errors[key].length > 1;
+                            errors[key].map((detail, idx) => {
+                                details += ` ${showNums ? `(${idx + 1}) ` : '' }${detail}`;
+                            })
                             return (
                                 <li key="key">
-                                    {key} {errors[key]}
+                                    {key}:{details}
                                 </li>
                             );
                         })

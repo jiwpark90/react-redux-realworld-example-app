@@ -115,7 +115,7 @@ class SettingsForm extends React.Component {
                     <button
                         className="btn btn-lg btn-primary pull-xs-right"
                         type="submit"
-                        disabled={this.state.inProgress}>
+                        disabled={this.props.inProgress}>
                         Update Settings
                     </button>
                     

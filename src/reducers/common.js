@@ -34,10 +34,19 @@ export default (state = defaultState, action) => {
                 currentUser: action.error ? null : action.payload.user
             };
         
-        // dispatched by editor
+        // dispatched by editor. redirect only if successful
         case 'ARTICLE_SUBMITTED':
+            if (action.error)
+                break;
             const redirectUrl = `article/${action.payload.article.slug}`;
             return { ...state, redirectTo: redirectUrl };
+            
+        // called from article
+        case 'DELETE_ARTICLE':
+            return {
+                ...state,
+                redirectTo: '/'
+            };
 
         // NOTE: this action type is also in auth.js.
         // what this means is that there are multiple reducers watching

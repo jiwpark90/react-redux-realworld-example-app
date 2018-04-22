@@ -2,7 +2,6 @@
 
 import ArticleMeta from './ArticleMeta';
 import CommentContainer from './CommentContainer';
-import { Link } from 'react-router';
 import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
@@ -14,7 +13,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    // TODO ??
     onLoad: payload => 
         dispatch({ type: 'ARTICLE_PAGE_LOADED', payload }),
     onUnload: () =>
@@ -85,7 +83,8 @@ class Article extends React.Component {
 
                     <hr />
 
-                    <div className="article-actions"></div>
+                    {/* TODO article actions is handled in ArticleMeta */}
+                    {/* <div className="article-actions"></div> */}
 
                     <div className="row">
                         <CommentContainer

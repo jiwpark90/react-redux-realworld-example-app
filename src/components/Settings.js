@@ -1,6 +1,6 @@
 import ListErrors from './ListErrors';
 import React from 'react';
-import { Link } from 'react-router';
+// import { Link } from 'react-router';
 import agent from '../agent';
 import { connect } from 'react-redux';
 import SettingsForm from './SettingsForm'
@@ -23,6 +23,8 @@ const mapDispatchToProps = dispatch => ({
 
 class Settings extends React.Component {
     render() {
+        console.log("PROPS");
+        console.log(this.props);
         return (
             <div className="settings-page">
                 <div className="container-page">
@@ -34,7 +36,8 @@ class Settings extends React.Component {
 
                             <SettingsForm
                                 currentUser={ this.props.currentUser }
-                                onSubmitForm={ this.props.onSubmitForm }/>
+                                onSubmitForm={ this.props.onSubmitForm }
+                                inProgress={ this.props.inProgress }/>
 
                             <hr />
 

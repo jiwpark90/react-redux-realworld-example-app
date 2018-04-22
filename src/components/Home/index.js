@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import agent from '../../agent';
 import Tags from './Tags';
 
-const Promise = global.Promise;
+//TODO ?? const Promise = global.Promise;
 
 const mapStateToProps = (state) => ({
     appName: state.common.appName,

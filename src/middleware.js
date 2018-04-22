@@ -13,7 +13,7 @@ const promiseMiddleware = store => next => action => {
                 action.payload = res;
                 store.dispatch(action);
             },
-            (error) => {
+            (error) => {                
                 action.error = true;
                 action.payload = error.response.body;
                 store.dispatch(action);

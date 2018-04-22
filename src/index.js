@@ -21,9 +21,8 @@ ReactDOM.render((
         <Route path="login" component={Login} />
         <Route path="register" component={Register} />
         <Route path="settings" component={Settings} />
-        {/* TODO passes params object? */}
         <Route path="article/:id" component={Article} />
-        {/* TODO wtf is @? test if it works with other symbols */}
+        {/* Q: can i use other symbols than @? A: yes - tested with ! */}
         <Route path="@:username" component={Profile} />
         <Route path="@:username/favorites" component={ProfileFavorites} />
         <Route path="editor" component={Editor} />

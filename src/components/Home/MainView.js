@@ -72,7 +72,6 @@ const GlobalFeedTab = props => {
 
 const MainView = (props) => {
     const onSetPage = page => {
-        console.log(props.tab);
         return props.onSetPage(props.tab, page);
     }
     return (

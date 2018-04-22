@@ -10,12 +10,6 @@ export default (state = {}, action) => {
             };
         case 'ARTICLE_PAGE_UNLOADED':
             return {};
-        // TODO does this really redirect???
-        case 'DELETE_ARTICLE':
-            return {
-                ...state,
-                redirectTo: '/'
-            };
         case 'ADD_COMMENT':
             return {
                 ...state,
