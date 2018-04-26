@@ -51,13 +51,10 @@ class App extends React.Component {
                 </div>
             );
         }
+        // load only the head if current user is not loaded
         return (
             <div>
                 <Header appName={this.props.appName} currentUser={this.props.currentUser} />
-                {
-                    /* this tells JSX to render the routed child components */ 
-                    this.props.children 
-                }
             </div>
         );
     }
