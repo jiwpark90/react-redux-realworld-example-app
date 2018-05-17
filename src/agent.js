@@ -3,8 +3,8 @@ import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
 
 // TODO test with my node backend
-const API_ROOT = 'https://conduit.productionready.io/api'
-// const API_ROOT = 'https://realworldapp.herokuapp.com/api';
+// const API_ROOT = 'https://conduit.productionready.io/api'
+const API_ROOT = 'https://realworldapp.herokuapp.com/api';
 
 // initialize the agent
 const superagent = superagentPromise(_superagent, global.Promise);
